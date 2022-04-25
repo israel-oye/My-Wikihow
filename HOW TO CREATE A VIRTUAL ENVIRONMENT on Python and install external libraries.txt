@@ -1,0 +1,38 @@
+type 'python -m venv venv' in the terminal
+
+VS Code should bring up a prompt sayting:
+"We noticed a new virtual environment has been created. Do you want to selct it..."
+choose "YES"
+
+in the file explorer tab, it should show a 'venv' drop-down
+
+if you don't see a '(venv)' in front of the line on the terminal, type in venv\scripts\activate
+
+	if you see “running scripts is disabled on this system,”
+	open the Windows PowerShell as an admin and type:
+		"set-executionpolicy remotesigned"
+	and select the appropriate option you want, which is "Y" for Yes and press Enter
+
+	go back to your terminal and type "venv\scripts\activate" again
+
+you can now install any external library you want using 
+	"pip install nameOfLibrary" 
+
+
+205
+
+According to Microsoft Tech Support it might be a problem with Execution Policy Settings.
+ To fix it, you should try executing "Set-ExecutionPolicy Unrestricted -Scope Process"
+ (as mentioned in the comment section by @wtsiamruk) in your PowerShell window.
+ This would allow running virtualenv in the current PowerShell session.
+
+There is also another approach that is more unsafe, but recommended by MS Tech Support.
+ This approach would be to use 
+Set-ExecutionPolicy Unrestricted -Force (which do unleash powers to screw Your system up).
+
+ However, before you use this unsafe way, be sure to check what your current ExecutionPolicy setting is 
+by using get-ExecutionPolicy.
+
+Then, when you are done,
+you can revert back to this ExecutionPolicy by using:
+ Set-ExecutionPolicy %the value the get-ExecutionPolicy command gave you% -Force.

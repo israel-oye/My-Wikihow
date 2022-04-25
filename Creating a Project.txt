@@ -1,0 +1,68 @@
+1.type "cmd" in the directory search bar of the folder where you want to create a project.
+
+2.after the prompt has opened, type 
+"dotnet new console -o NAME_OF_YOUR_PROJECT"
+
+3. the CLI will show that the project has been created successfully.
+
+4. type "cd NAME_OF_YOUR_PROJECT"
+
+5. CLI will take you to to the directory of your project.
+
+6. type "code ."
+This will open your project in Visual Studio Code.
+
+! dotnet 6.0 does not initiate a project with a Main method because of some changes. If you want one,
+we have to create a new project using an older framework like dotnet 5 and previous.
+
+Instead of using	 dotnet new console -o NameOfProject, you use:
+			dotnet new console --framework net5.0 -o NameOfProject
+
+
+
+
+
+
+cd $dir && start chrome $fileName
+
+Building Blocks of OOP
+class nameOfClass{
+	accessibility dataType attribute1
+	accessibility dataType attribute2
+	.
+	.
+	.
+	accessibility dataType attributex
+
+	//in C# there are two types of attributes.
+	//fields and properties
+
+	accessibility dataType field;
+	accessibility dataType property { get; set; }
+	accessibility dataType property_x { get; } //read-only property
+	
+
+
+	accessibility dataType function/methodName(){
+	//no arguments means there's a return type
+	
+	return variable/data of same dataType as above.
+	}
+	
+	//for constructor:
+	accessibility className(arg1==attribute1,arg_x = attribute x){
+	this.arg_value = attribute1 //setting the value of the argument to the attribute
+	this.arg_value_x = attributex
+	}
+
+}
+
+public static NameOfClass {
+			
+	//Static means you can't instantiate an object of the class
+	//e.g new staticClass object = new staticClass(); will give an error
+	//you can only call a static class with it's name and use it's methods.
+	// staticClass.method(params);
+	//also static classes cannot have constructors
+
+}
