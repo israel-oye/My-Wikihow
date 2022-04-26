@@ -6,7 +6,7 @@ Then add the remote repository to the project
 
 Then add (all) the files to the repository
 to add the file:
-	git add or
+	git add .
 	git add <nameoffile>
 
 To add all the files
