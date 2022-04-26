@@ -1,0 +1,33 @@
+For a new project, initialize git
+	git init
+
+Then add the remote repository to the project
+	git remote add <https:github.linkToYourRemoteProject> or the SSH
+
+Then add (all) the files to the repository
+to add the file:
+	git add or
+	git add <nameoffile>
+
+To add all the files
+	git add -A
+
+After adding, commit with a message
+	git commit -m "initial commit" or sumn like that
+
+Then push to GitHub
+	git push
+
+
+
+FOR PROJECT THAT IS ALREADY ON GIT:
+
+First add to git hub
+git add
+
+then commit with a message
+git commit -m "message"
+
+finally push to the branch
+git push origin <nameOfBranch>
+
