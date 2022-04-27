@@ -2,7 +2,7 @@ For a new project, initialize git
 	git init
 
 Then add the remote repository to the project
-	git remote add <https:github.linkToYourRemoteProject> or the SSH
+	git remote add origin <https:github.linkToYourRemoteProject> or the SSH
 
 Then add (all) the files to the repository
 to add the file:
