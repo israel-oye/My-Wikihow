@@ -16,7 +16,7 @@ After adding, commit with a message
 	git commit -m "initial commit" or sumn like that
 
 Then push to GitHub
-	git push
+	git push origin <nameOfBranch>
 
 
 
