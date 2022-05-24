@@ -12,6 +12,13 @@ if you don't see a '(venv)' in front of the line on the terminal, type in venv\s
 	open the Windows PowerShell as an admin and type:
 		"set-executionpolicy remotesigned"
 	and select the appropriate option you want, which is "Y" for Yes and press Enter
+	
+	!!! SAFER OPTION !!!
+	"set-executionpolicy -scope "currentuser" 
+	It should show an ExecutionPolicy: prompt
+	
+	Type in Unrestricted as in
+	ExecutionPolicy: Unrestricted
 
 	go back to your terminal and type "venv\scripts\activate" again
 
@@ -25,6 +32,9 @@ According to Microsoft Tech Support it might be a problem with Execution Policy 
  To fix it, you should try executing "Set-ExecutionPolicy Unrestricted -Scope Process"
  (as mentioned in the comment section by @wtsiamruk) in your PowerShell window.
  This would allow running virtualenv in the current PowerShell session.
+ 
+ 
+ Quora link: https://qr.ae/pvCAoD
 
 There is also another approach that is more unsafe, but recommended by MS Tech Support.
  This approach would be to use 
