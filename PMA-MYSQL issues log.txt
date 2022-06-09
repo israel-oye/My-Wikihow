@@ -75,6 +75,9 @@ Using phpMyAdmin as a GUI app for MySQL gave me a number of issues.
 		UPDATE your_table SET `nameOfColumnwAutoInc` = @num := (@num+1);
 
 		ALTER TABLE your_table AUTO_INCREMENT =1;
+		https://stackoverflow.com/a/5437720
+
+
 
 I'm facing an issue currently, I can't create view with the create view button but
 I've not found a fix bc I don't have that time for now. It took hours and hours of
