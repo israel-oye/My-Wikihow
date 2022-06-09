@@ -1,0 +1,90 @@
+Using phpMyAdmin as a GUI app for MySQL gave me a number of issues.
+
+1) The 'toggle-relationship lines' button was not working on phpMyAdmin designer.
+	Went through a number of solutions online and
+	one was adding adding 'pma__relation' to the
+	$cfg['Servers'][$i]['relation'] line in config.inc.php file
+	file is located in xampp folder in htdocs or Local disk
+		C:/xampp/phpmyadmin/config.inc.php
+	https://stackoverflow.com/a/32002861
+
+	This did not work for me though, I had to update phpMyAdmin.
+
+
+2) After updating phpMyAdmin by downloading the zip file and replacing the contents in the
+   phpMyAdmin folder in xampp. The 'toggle-relationship-lines' button was now working
+   but the mouse cursor was awful in dragging the tables. It was frustrating.
+	As usual, I took to the internet to figure out why and I fix found a
+	fix. 
+	Open the move.js file in notepad and edit a few things
+	move.js is located in
+		xampp/phpMyAdmin/js/src/designer
+	change the '#page_content' to 'document' inside the
+	DesignerMove.enablePageContentEvents function
+	i.e before: 
+			$('#page_content').off('mouseup');
+    			$('#page_content').off('mousemove');
+    			$('#page_content').on('mousedown', function (e)...
+	     after:
+			$('#page_content').off('mouseup');
+    			$('#page_content').off('mousemove');
+    			$(document).on('mousedown', function (e)...
+	AND I SAVED, RESTARTED mysql in services and RELOADED the window and
+	IT WORKED LIKE MAGIC.
+	https://github.com/phpmyadmin/phpmyadmin/issues/16199#issuecomment-683289032
+
+
+3) Again (wahala no dey finish), I had another issue.
+   After failed inserts into my db from my python program/script,
+   the table was jumping values in the column that had the auto increment values.
+   meaning, it created indexes [sic] for every entry into the table even though they failed.
+
+	As I entered the query into the search bar, Google was already screaming that
+	the issue was with auto_inc_lockmode for InnoDB (the database engine)
+	I tried to understand the documentation MySQL put on this issue but 
+	apparently I don't speak Cantonese.
+	I picked that there were 3 modes:
+		0 or traditional
+		1 or consecutive &
+		2 or interleaved.
+	I understood a little and I tried to change my auto_inc_lockmode setting to 0
+	To change the auto_inc_lockmode,
+	once again, you edit a configuration file. for this issue,
+	it's my.ini or my.cnf
+	You can easily open this by clicking on config for MySQL in xampp or
+	going to the xampp folder once again
+		xampp/mysql/bin/
+	you find a file named 'my'
+	open it and scroll to the InnoDB settings and add
+		innodb_autoinc_lock_mode = 0
+	and save it, then restart MySQL.
+	After I changed it to 0, it worked. It reset to normal but for some reason
+	later, it started skipping values again.
+
+	Finally, I found a final fix.
+	Go to the table with the issue in phpMyAdmin and go to the Operations tab
+	Here you'll find an AUTO_INCREMENT option and you can set it manually to the
+	next number after the last index in the auto_increment column.
+	Better still, you can sort it with an SQL query.
+		ALTER TABLE nameOfTable AUTO_INCREMENT = 1;
+			
+				 OR
+
+		SET  @num := 0;
+
+		UPDATE your_table SET `nameOfColumnwAutoInc` = @num := (@num+1);
+
+		ALTER TABLE your_table AUTO_INCREMENT =1;
+
+I'm facing an issue currently, I can't create view with the create view button but
+I've not found a fix bc I don't have that time for now. It took hours and hours of
+aggressively browsing the internet to find these things.
+		
+Also want to add that using '?' as placeholder variable for execute statements in
+Python is throwing an error.
+e.g
+	cursor.execute("SELECT * FROM employees WHERE id = ?", (2,)) ❎
+I had to use a s-format string
+	cursor.execute("SELECT * FROM table WHERE id = %s", (2,)) ✅
+	
+	
