@@ -68,7 +68,7 @@ Using phpMyAdmin as a GUI app for MySQL gave me a number of issues.
 	Better still, you can sort it with an SQL query.
 		ALTER TABLE nameOfTable AUTO_INCREMENT = 1;
 			
-				 OR
+				 OR MORE EFFICIENTLY
 
 		SET  @num := 0;
 
