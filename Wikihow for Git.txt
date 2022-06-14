@@ -3,7 +3,11 @@ For a new project, initialize git
 
 Then add the remote repository to the project
 	git remote add origin <https:github.linkToYourRemoteProject> or the SSH
-
+	
+	
+And add the branch 
+	git branch -M main #default
+	
 Then add (all) the files to the repository
 to add the file:
 	git add .
@@ -14,20 +18,21 @@ To add all the files
 
 After adding, commit with a message
 	git commit -m "initial commit" or sumn like that
+	
 
 Then push to GitHub
-	git push origin <nameOfBranch>
+	git push -u origin <nameOfBranch> #main by default
 
 
 
 FOR PROJECT THAT IS ALREADY ON GIT:
 
 First add to git hub
-git add
+git add -A
 
 then commit with a message
 git commit -m "message"
 
 finally push to the branch
-git push origin <nameOfBranch>
+git push -u origin <nameOfBranch>
 
