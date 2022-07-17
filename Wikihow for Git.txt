@@ -36,3 +36,37 @@ git commit -m "message"
 finally push to the branch
 git push -u origin <nameOfBranch>
 
+
+
+IMPORTANT NOTE
+When you create a new empty repo on github and it has a readme file and you try to push by
+	git push -u origin <nameofbranch>
+Github not permit it likely because the remote repo has a README (therefore it is ahead) while the local does not.
+
+You will likely see something like:
+	! [rejected]        main -> main (fetch first)
+	error: failed to push some refs to 'https://github.com/israel-oye/Articlus.git'
+	hint: Updates were rejected because the remote contains work that you do
+	hint: not have locally. This is usually caused by another repository pushing
+	hint: to the same ref. You may want to first integrate the remote changes
+	hint: (e.g., 'git pull ...') before pushing again.
+	hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+	
+The solution is in the response.
+Github suggests that you pull from the remote branch so everything will be up to date.
+You pull by entering:
+	git pull origin <nameofremotebranch>
+
+Again, this will likely throw an exception and it's likely to be the 'unrelated history' one.
+	* branch            main       -> FETCH_HEAD
+ 	* [new branch]      main       -> origin/main
+	fatal: refusing to merge unrelated histories
+It's simple. The local and remote repos have a difference of a README file and since there hasn't been a push
+to the remote, GitHub says these two repos don't have any history and won't push to the remote branch.
+
+To fix this, we enter a simple line into the terminal:
+	git pull origin main --allow-unrelated-histories
+Abracadabra.We can now push successfully to the remote repository
+i.e
+	git push -u origin <nameofbranch>
+	-u means upstream (as in remote)
