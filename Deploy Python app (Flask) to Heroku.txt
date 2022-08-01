@@ -1,0 +1,139 @@
+First things first. Sign Up on Heroku.
+
+Then go to Google and INSTALL HEROKU CLI. It's an app that enables
+you to use heroku commands in your terminal
+
+After installation, check if it's installed to path by typing
+	$env:PATH
+In the terminal (Powershell)
+
+Or heroku -v
+To check the version.
+
+If it doesn't show. Close VS code and open again.
+
+
+INSTALL GUNICORN. It's the Python WSGI HTTP Server package that
+acts like a UNIX server
+	pip install gunicorn
+
+On heroku, you can't use sqlite or file based dbs because of dynos (jargon)
+but they provide free PostgreSQL service as an add-on (which we'll discuss later)
+To use PostgreSQL on Python, you need to install a package:
+	pip install psycopg2
+
+Heroku needs to know the REQUIRED packages for your app to work
+so we'll use create a requirements.txt file.
+In the terminal type:
+	pip freeze > requirements.txt
+This creates the file automatically and names all the packages in use
+with their version.
+
+
+Next you'll create a file named 'Procfile'
+You can create it manually or if you're using bash, enter:
+	$ echo web: gunicorn <nameOfYOURapp>:app
+
+If you're creating a Procfile manually:
+	make sure it doesn't have an extension
+	not 'Procfile.txt' or 'Procfile.doc' or .anything.
+	Just Procfile.
+
+	Inside the Procfile add the ff line:
+		web: gunicorn <nameOfYourMainScript>:app	#JUST THE NAME OF APP WITHOUT THE EXTENSION
+
+LOGIN TO HEROKU in your terminal.
+Type:
+	heroku login
+and it will redirect to a browser
+OR
+	heroku login -i
+to enter login details in terminal
+Fill in your details
+
+
+CREATE THE APP:
+Inside the terminal:
+	heroku create <nameOfYourProject>	#it has to be a unique name
+If successful, you'll get a link to your project
+	e.g https://yourapp.herokuapp.com
+
+BUT...
+We're not there yet.
+You need extra services for your app to run remotely like for storing data - database,
+logging, automatic email/SMS, analytics, searching, caching, content management, alerts,
+Image & video processing and so on. Phew!
+
+These services are called ADD-ONS
+Luckily, Heroku has a free PostgreSQL add-on, so we'll use just that.
+
+To add this addon, in your terminal, enter:
+	heroku addons:create heroku-postgresql:hobby-dev --app <nameOfApp>
+
+Doing this generates a database url and to get the url, we can get it by going to
+the dashboard on our browser and copying it from the CONFIG VARS under Settings.
+OR simply:
+	heroku config --app <nameOfApp>
+to get all config vars.
+
+Now we can change the SQLALCHEMY_DATABSE_URI in our script from the sqlite file path
+to the PostgreSQL link.
+
+NOTE ⚠️:
+	In the model class, PostgreSQL doesn't use length for it text fields.
+	So if you have
+		text_col = db.Column(db.Text(40))
+	change to:
+		text_col = db.Column(db.Text())
+	the String type doesn't have this limitation so you're free to add length to it.
+
+It's time for Git!
+Heroku will run you app from a custom repo created on the server.
+That means we'll
+Add all files:
+	git add -A
+Commit:
+	git commit -m "commit message"
+Push:
+to your personal repo:
+	git push -u origin <nameOfBranch>
+to heroku:
+	git push heroku <same branch as above>
+
+This will prompt Heroku to build your app and install all dependencies
+
+AGAIN!
+The landing page may not work but parts of your app that uses the DB
+will likely not work because the DB is empty.
+
+to initialize the db model.
+We can do it two ways.
+Running Python on our server:
+	heroku run python
+	>>> from main_script/app import db
+	>>> db.create_all()		#if it runs w/o error, it was successful	
+	db.create_all()
+	>>> exit() 				#exit the python terminal
+The above totally depends on your code structure and will only work
+if in your main script, you did something like:
+	app = Flask(__name__)
+	db = SQLALCHEMY(app)
+
+To avoid the stress of running Python terminals and what not,
+inside your main script,
+	inside your model.py, do this:
+		db = SQLALCHEMY()
+	then in main/app/server.py:
+		from model import db	
+	
+		app = Flask(__name__)
+		#make sure to init app after app config
+		db.init_app(app)  
+
+		with app.app_context():
+			db.create_all()
+this will save you much more stress.
+
+AND C'EST FINI.
+The app should be up and running now
+		
