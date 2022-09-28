@@ -65,7 +65,7 @@ It's simple. The local and remote repos have a difference of a README file and s
 to the remote, GitHub says these two repos don't have any history and won't push to the remote branch.
 
 To fix this, we enter a simple line into the terminal:
-	git pull origin main --allow-unrelated-histories
+	git pull origin <nameofremotebranch> --allow-unrelated-histories
 Abracadabra.We can now push successfully to the remote repository
 i.e
 	git push -u origin <nameofbranch>
