@@ -70,3 +70,22 @@ Abracadabra.We can now push successfully to the remote repository
 i.e
 	git push -u origin <nameofbranch>
 	-u means upstream (as in remote)
+
+TO CREATE A BRANCH
+	git branch <nameofnewbranch>
+	
+	When you create a new branch, it will copy all the files from the default branch and then you can make whatever changes you want to in that branch
+	add the newly modified file:
+		git add <newlymodifiedfile>
+	commit:
+		git commit -m "commit message"
+	and push to the remote repository:
+		git push -u origin <nameofnewbranch>
+	GitHub will create the branch automatically remotely
+	
+TO VIEW all branches in the (local) repository
+	git branch
+	the branch that you're currently in will be highlighted in the terminal
+	
+TO ENTER A BRANCH
+	git checkout <nameofbranch>
