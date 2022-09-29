@@ -45,7 +45,7 @@ Github not permit it likely because the remote repo has a README (therefore it i
 
 You will likely see something like:
 	! [rejected]        main -> main (fetch first)
-	error: failed to push some refs to 'https://github.com/israel-oye/Articlus.git'
+	error: failed to push some refs to 'https://github.com/<user>/<reponame>.git'
 	hint: Updates were rejected because the remote contains work that you do
 	hint: not have locally. This is usually caused by another repository pushing
 	hint: to the same ref. You may want to first integrate the remote changes
@@ -89,3 +89,65 @@ TO VIEW all branches in the (local) repository
 	
 TO ENTER A BRANCH
 	git checkout <nameofbranch>
+
+
+		** HANDLING CONFLICT **
+If for instance, another contributor makes changes to a file and commits and one is working on the same file locally
+	OR
+If a file is updated on the remote repository,
+both of these two scenarios lead to CONFLICT and it not possible to push changes from the local to the remote because of the CONFLICT
+
+For instance, this is file1.txt:
+		1. Line 1
+		
+Dev A adds a line to file1.txt and commits
+		1. Line 1
+		2. Modified by Remote dev
+As fate would have it, we are similarly working on this file and we're done with the changes and ready to push to Git
+		1. Line 1
+		2. Modified by Local dev
+		
+	We do:
+		git add "file1.txt"
+		git commit -m "changes made locally"
+	and then when i try:
+		git push -u origin <remotebranch>
+	hell breaks loose in the terminal:
+		To github.com:<user>/<remote_repo_name>.git
+ 		! [rejected]        main -> main (fetch first)
+		error: failed to push some refs to 'github.com:<user>/<remote_repo_name>.git'
+		hint: Updates were rejected because the remote contains work that you do
+		hint: not have locally. This is usually caused by another repository pushing
+		hint: to the same ref. You may want to first integrate the remote changes
+		hint: (e.g., 'git pull ...') before pushing again.
+		hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+	This happens because of CONFLICT!
+	The solution is in the hint once again.
+	The remote and local repository have to be in sync and in order to do this, we call an old trick from the magic book:
+		git fetch 	
+		git merge       #combines the remote and local repo at the stage to show the conflict
+		
+	file1.txt now looks like this after merging:
+		1. Line 1
+		<<<<<< HEAD (Current Change)
+		2. Modified by Local dev
+		====
+		3. Modified by Remote dev
+		>>>>>> refs/remotes/origin/<name_of_remote_branch> (Incoming Change)
+		
+	We now have to fix the conflict manually, we could decide to:
+	-Accept current change (Local change overwrites remote change)
+	-Accept incoming change (Remote change overwrites local change) or
+	-Accept both changes (both changes stay alive)
+	
+	If we decide to resolve the conflict by ACCEPTING BOTH CHANGES:
+	file1.txt now looks like this:
+		1. Line 1
+		2. Modified by Local dev
+		3. Modified by Remote dev
+	
+	after resloving the conflict, we now add, commit and push upstream:
+		git add "file1.txt"
+		git commit -m "resolve conflict"
+		git push -u origin <name_of_remote_branch>
+	This should work without hitches and we can now recline in a chair and glare at the setting sun in the horizon.
