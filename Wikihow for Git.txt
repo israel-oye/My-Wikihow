@@ -1,5 +1,5 @@
 For a new project, initialize git
-	git init
+	git init #Make sure Git is installed on your local machine
 
 Then add the remote repository to the project
 	git remote add origin <https:github.linkToYourRemoteProject> or the SSH
