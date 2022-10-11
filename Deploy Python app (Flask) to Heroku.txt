@@ -145,14 +145,14 @@ To use environment variables in production, you have to add them manually to the
 	no need to change your code, the getenv function will read the config vars
 	
 Also the PostgreSQL Database Url can cause errors because the URL starts with
-	"https:postgres:///..."
+	"https:postgres://..."
 The error is because PostgreSQL databse uri now start with "postgresql:///.."
 The 'L' being the difference.
 
 The database is always maintained by Heroku and the uri keeps changing, it is therefore
 not advisable to place the URI statically in the script.
 To bypass this, in the SQLALCHEMY DATABASE URI configuration, do this:
-	app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABSE_URL).replace("postgres://", "postgresql:///")
+	app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABSE_URL").replace("postgres://", "postgresql:///")
 	
 Et voilà!
 		
