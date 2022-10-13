@@ -146,7 +146,7 @@ To use environment variables in production, you have to add them manually to the
 	
 Also the PostgreSQL Database Url can cause errors because the URL starts with
 	"https:postgres://..."
-The error is because PostgreSQL databse uri now start with "postgresql:///.."
+The error is because PostgreSQL databse uri now start with "postgresql://.."
 The 'L' being the difference.
 
 The database is always maintained by Heroku and the uri keeps changing, it is therefore
