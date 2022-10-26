@@ -39,7 +39,7 @@ git push -u origin <nameOfBranch>
 
 
 IMPORTANT NOTE
-When you create a new empty repo on github and it has a readme, LICENSE or any other file on creation and you try to push by
+When you create a new empty repo on github and it already has a readme, LICENSE or any other file on creation and you try to push by
 	git push -u origin <nameofbranch>
 Github not permit it likely because the remote repo has a README (therefore it is ahead) while the local does not.
 
