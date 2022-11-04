@@ -19,7 +19,7 @@ Instead of using	 dotnet new console -o NameOfProject, you use:
 			dotnet new console --framework net5.0 -o NameOfProject
 
 
-
+\\\
 
 
 
