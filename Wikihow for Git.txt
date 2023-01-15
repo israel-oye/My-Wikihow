@@ -23,7 +23,7 @@ After adding, commit with a message
 Then push to GitHub
 	git push -u origin <nameOfBranch> #main by default
 
-######################################################################################
+#######################################################################
 
 FOR PROJECT THAT IS ALREADY ON GIT:
 
