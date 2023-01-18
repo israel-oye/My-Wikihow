@@ -6,7 +6,7 @@ Then add the remote repository to the project
 	
 	
 And add the branch 
-	git branch -M main #default
+	git branch -M main #This makes it the default branch
 	
 Then add (all) the files to the repository
 to add the file:
