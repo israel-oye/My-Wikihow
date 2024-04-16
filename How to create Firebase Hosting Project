@@ -1,0 +1,17 @@
+FIREBASE Hosting
+
+1. INSTALL NODE   - nodejs.org
+2. INSTALL FIREBASE-TOOLS  - npm i -g firebase-tools
+3. CREATE A FIREBASE PROJECT console.firebase.google.com
+4. LOGIN firebase login (y/n)
+5. CREATE A FOLDER FOR YOUR PROJECT
+5b. OPEN THE FOLDER IN CMD/TERMINAL
+6. Initialize a project - firebase init
+Are you ready to proceed - y
+Which firebase feature do you want to setup - configure firebase hosting and optionally setup github action deploy
+Please select an option - use an existing project and pick the project
+What do you want to use as your public directory - press enter to select public as the default folder
+Do you want to configure as a single page application - n
+Set up automatic builds and deploy - n
+7. PUT YOUR FILES IN THE PUBLIC FOLDER - Press enter
+8 RUN firebase deploy
