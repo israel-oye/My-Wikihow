@@ -1,3 +1,5 @@
+!Always Restart the postgresql-x86 service after editing any *.conf file
+
 1. 
 (On Ubuntu) To switch to a postgres user:
 $ sudo -i -u <postgres-username>
@@ -21,7 +23,20 @@ host    all             all             127.0.0.1/32            trust
 host    all             all             ::1/128                 trust
 
 Source: https://stackoverflow.com/a/60816778/16792256
+Restart the postgresql-x86 service after editing the .conf file
 This lets us login the postgres user to the postgres server without authentication.
+
+In the psql shell, run the following:
+postgres=# ALTER USER postgres PASSWORD 'OGBeks281';
+ALTER ROLE
+
+OR this
+postgres=# \password
+Enter new password for user "postgres":
+Enter it again:
+
+When done, don't leave the settings like that OBVIOUSLY. Change the `trust` back to `scram-sha-256` or any other.
+
 
 
 3.
