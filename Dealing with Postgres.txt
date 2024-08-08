@@ -1,0 +1,48 @@
+1. 
+(On Ubuntu) To switch to a postgres user:
+$ sudo -i -u <postgres-username>
+e.g
+$ sudo -i -u postgres
+
+2.
+To change postgres user password, 
+open pg_hba.conf file in Windows: `"C:\Program Files\PostgreSQL\14\data\pg_hba.conf"` for Ubuntu:[refer to https://stackoverflow.com/a/76606645/16792256]
+and change the following setttings 
+From:
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            scram-sha-256
+# IPv6 local connections:
+host    all             all             ::1/128                 scram-sha-256
+
+To:
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            trust
+# IPv6 local connections:
+host    all             all             ::1/128                 trust
+
+Source: https://stackoverflow.com/a/60816778/16792256
+This lets us login the postgres user to the postgres server without authentication.
+
+
+3.
+To create another database user:
+After loggging in to psql as postgres user, run
+
+postgres=# CREATE USER newusername WITH PASSWORD 'User-Password';
+#The CL will show this below. Ignore it
+CREATE ROLE.
+
+Creating a user without attaching it to a database is virtually useless. We can't even login the user.
+That's why immediately after, we should create a database
+
+postgres=# CREATE DATABASE newdb WITH OWNER = newusername;
+CREATE DATABASE
+
+
+To login to a particular database, run
+> psql -h localhost -d databasename -U myuser -p <port>
+The port is usually 5432. To know the port, check the postgresl.conf in the
+"C:\Program Files\PostgreSQL\<version>\data\postgresql.conf" or 
+/etc/postgresql/<version>/main/postgresql.conf on Ubuntu
+
+Run $ sudo nano /etc/postgresql/<version>/main/postgresql.conf to edit on Ubuntu.
