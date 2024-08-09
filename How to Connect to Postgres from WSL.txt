@@ -1,0 +1,67 @@
+1. Ensure postgres-x86-14 service is running on Windows
+
+
+2. 
+In CMD, run:
+ipconfig
+
+In WSL2, run:
+$ ip route | grep default
+
+On Windows, look for the IP address under
+the section Ethernet adapter vEthernet (WSL). 
+This is usually the IP that your WSL 
+instance can use to connect to the Windows host.
+
+On Ubuntu instance, the IP address following
+default via is typically the gateway IP that
+WSL uses to access the Windows host. 
+This is what you should use as the host IP
+in your connection string.
+
+They should be the same IP address...
+
+
+
+3.
+Open postgresql.conf in the PostgreSQL data directory, C:\Program Files\PostgreSQL\<version>\data\postgresql.conf).
+Confirm listen_addresses is set to '*' as in:
+
+listen_addresses='*'
+
+
+
+4.
+Make sure that the Windows Firewall is not blocking connections to PostgreSQL:
+
+Open the Windows Defender Firewall with Advanced Security.
+Create an inbound rule to allow TCP traffic on port 5432:
+Inbound Rules > New Rule > Port > TCP > Specific local ports: 5432 > Allow the connection > Apply to all profiles (Domain, Private, Public) > Name the rule.
+Ensure this rule is active and enabled.
+
+
+5.Finally,
+Replace <windows_ip> with the IP address you found via ipconfig or ip route,
+<username> with your PostgreSQL username, and <database_name> with the name
+of your database.
+
+$ psql -h <windows_ip> -U <username> -d <database_name>
+
+
+
+
+
+Troubleshooting Connection Issues
+
+
+*Connection Timeout:
+
+Ensure that the IP address is correct and that the firewall allows traffic on port 5432.
+If using a specific IP does not work, try localhost or 127.0.0.1 from WSL,
+as WSL's internal routing sometimes handles this differently.
+
+*Network Conflicts:
+
+If there’s a network conflict, consider disabling or reconfiguring the WSL
+network adapter and retrying. 
+ENSURE NO OTHER PROCESSES OR SERVICES ARE USING 5432 ON EITHER WSL OR WINDOWS.
