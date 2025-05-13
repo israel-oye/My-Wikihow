@@ -61,3 +61,18 @@ The port is usually 5432. To know the port, check the postgresl.conf in the
 /etc/postgresql/<version>/main/postgresql.conf on Ubuntu
 
 Run $ sudo nano /etc/postgresql/<version>/main/postgresql.conf to edit on Ubuntu.
+
+
+
+To access a database running on postgres on Windows in WSL, 
+1. run `ipconfig` on Windows and look for the IPv4 address under Ethernet adapter vEthernet (WSL (Hyper-V firewall))
+OR
+On the Ubuntu instance, run  $ ip route | grep default to see the windows machine host IP.
+
+Ensure the postgresql service is running on windows and on the WSL too.
+To check if postgres is running on WSL ubuntu:
+sudo systemctl status postgresql
+Run sudo systemctl start postgresql if it is not running.
+
+Now connect to the windows postgres database:
+psql -h <ip-gotten-from-ipconfig> -d <database-name> -U <database-user> -p <port>
