@@ -151,3 +151,10 @@ As fate would have it, we are similarly working on this file and we're done with
 		git commit -m "resolve conflict"
 		git push -u origin <name_of_remote_branch>
 	This should work without hitches and we can now recline in a chair and glare at the setting sun in the horizon.
+
+
+TO CLONE FROM A BRANCH
+git clone -b branch <git-url>
+
+TO UNTRACK A FILE
+git rm -r -cached path/to/file
