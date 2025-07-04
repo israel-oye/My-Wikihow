@@ -27,7 +27,7 @@ Restart the postgresql-x86 service after editing the .conf file
 This lets us login the postgres user to the postgres server without authentication.
 
 In the psql shell, run the following:
-postgres=# ALTER USER postgres PASSWORD 'OGBeks281';
+postgres=# ALTER USER postgres PASSWORD '*********';
 ALTER ROLE
 
 OR this
