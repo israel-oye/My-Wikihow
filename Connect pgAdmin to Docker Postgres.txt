@@ -1,0 +1,6 @@
+1. Expose the docker service using ports
+e.g ports:
+    5432:5432
+2. Build the container
+3. Use localhost as the host
+4. ENter DB-Name, DB-password and save and connect
