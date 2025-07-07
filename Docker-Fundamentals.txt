@@ -1,0 +1,13 @@
+1. Open WSL. Ensure its running
+2. Start Docker Desktop
+3. Add Dockerfile
+4. Add Docker-Compose file with all settings
+5. Add .env file, Docker will read it
+6. Run `docker-compose up --build` to build and run the container
+6b. `docker-compose down -v` to stop and delete a container
+7. How to run commands in a container
+	- docker ps to get a list of active containers
+	- docker -it exec <container_hash> bash
+8. Run container in background:
+	- `docker-compose up -d`
+	- `docker run -d`
