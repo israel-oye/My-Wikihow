@@ -47,7 +47,7 @@
 | `docker-compose up -d`               | Start services in background (detached)          |
 | `docker-compose down`                | Stop and remove containers, networks             |
 | `docker-compose down -v`             | Same as above, and remove volumes (⚠️ data loss) |
-| `docker-compose exec <service> bash` | Open terminal in running container               |
+| `docker-compose exec -it <service> bash` | Open terminal in running container               |
 | `docker-compose logs`                | Show logs from all services                      |
 | `docker-compose logs -f`             | Follow logs live                                 |
 
