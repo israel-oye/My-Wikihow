@@ -158,3 +158,8 @@ git clone -b branch <git-url>
 
 TO UNTRACK A FILE
 git rm -r -cached path/to/file
+
+TO ADD A FILE TO THE LAST COMMIT
+git add <file>
+git commit --amend --no-edit
+git push origin <branch> --force-with-lease
